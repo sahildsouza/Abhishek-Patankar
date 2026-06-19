@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>IRON PULSE ADMIN | CORE COMMAND</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,700;0,900;1,900&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        orange: {
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            200: '#fed7aa',
+                            300: '#fdba74',
+                            400: '#fb923c',
+                            500: '#f97316',
+                            600: '#ea580c',
+                            700: '#c2410c',
+                            800: '#9a3412',
+                            900: '#7c2d12',
+                            950: '#431407',
+                        }
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    fontFamily: {
+                        "headline": ["Public Sans", "sans-serif"],
+                        "display": ["Public Sans", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "label": ["Public Sans", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #0a0a0a;
+            color: #e5e5e5;
+            font-family: 'Inter', sans-serif;
+        }
+        .font-headline { font-family: 'Public Sans', sans-serif; }
+        .glass-panel {
+            background: rgba(23, 23, 23, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 69, 0, 0.1);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #171717;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #ea580c;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-neutral-950 text-neutral-200 antialiased">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-neutral-900 dark:bg-neutral-950 border-b border-neutral-800 shadow-2xl">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-orange-500 dark:text-orange-400 text-2xl" data-icon="bolt">bolt</span>
+<h1 class="text-2xl font-black italic text-orange-600 dark:text-orange-500 tracking-widest font-headline uppercase">IRON PULSE ADMIN</h1>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex gap-6 mr-6">
+<a class="text-orange-500 font-bold font-label uppercase tracking-widest text-sm" href="#">Registrations</a>
+<a class="text-neutral-400 hover:bg-neutral-800 transition-colors px-2 py-1 rounded font-label uppercase tracking-widest text-sm" href="#">Analytics</a>
+<a class="text-neutral-400 hover:bg-neutral-800 transition-colors px-2 py-1 rounded font-label uppercase tracking-widest text-sm" href="#">Settings</a>
+</div>
+<div class="flex items-center gap-3 pl-4 border-l border-neutral-800">
+<span class="text-xs font-bold font-label text-neutral-400 uppercase hidden sm:block">Admin User</span>
+<div class="w-10 h-10 rounded-full bg-orange-600 flex items-center justify-center text-white font-bold border-2 border-orange-500 shadow-[0_0_10px_rgba(234,88,12,0.3)]">
+                    AU
+                </div>
+</div>
+</div>
+</header>
+<!-- NavigationDrawer -->
+<aside class="fixed left-0 top-16 h-full w-64 flex flex-col pt-4 bg-neutral-900 dark:bg-neutral-950 border-r border-neutral-800 shadow-inner-xl hidden md:flex">
+<div class="px-6 py-4 mb-4">
+<h2 class="text-xl font-headline font-black text-white tracking-widest">CORE COMMAND</h2>
+</div>
+<nav class="flex-1 px-2 space-y-1">
+<!-- Active State for Registrations -->
+<a class="bg-orange-600 text-white rounded-lg mx-2 my-1 shadow-[0_0_15px_rgba(234,88,12,0.4)] px-4 py-3 flex items-center gap-3 transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-label font-medium uppercase tracking-widest text-sm">Registrations</span>
+</a>
+<a class="text-neutral-500 hover:text-white hover:bg-neutral-800 transition-colors mx-2 my-1 px-4 py-3 flex items-center gap-3 rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-orange-500" data-icon="monitoring">monitoring</span>
+<span class="font-label font-medium uppercase tracking-widest text-sm">Analytics</span>
+</a>
+<a class="text-neutral-500 hover:text-white hover:bg-neutral-800 transition-colors mx-2 my-1 px-4 py-3 flex items-center gap-3 rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-orange-500" data-icon="settings">settings</span>
+<span class="font-label font-medium uppercase tracking-widest text-sm">Settings</span>
+</a>
+</nav>
+<div class="p-4 border-t border-neutral-800">
+<div class="rounded-lg bg-neutral-800/50 p-4 relative overflow-hidden">
+
+<p class="text-[10px] font-bold text-orange-500 uppercase mb-1 relative z-10">System Load</p>
+<div class="w-full bg-neutral-700 h-1 rounded-full overflow-hidden relative z-10">
+<div class="bg-orange-500 h-full w-[42%]"></div>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="pt-24 pb-20 md:ml-64 px-4 md:px-8 min-h-screen">
+<!-- Header Section -->
+<div class="mb-8 flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+<div>
+<div class="flex items-center gap-2 mb-2">
+<div class="w-2 h-8 bg-orange-600"></div>
+<h2 class="text-4xl font-black italic tracking-tighter font-headline uppercase text-white">Registrations</h2>
+</div>
+<p class="text-neutral-500 font-medium">Managing incoming pulse members and growth metrics.</p>
+</div>
+<!-- Metric Card -->
+<div class="glass-panel p-6 rounded-xl flex items-center gap-6 min-w-[280px] shadow-xl relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 opacity-5 group-hover:opacity-10 transition-opacity">
+<span class="material-symbols-outlined text-8xl" data-icon="group">group</span>
+</div>
+<div class="bg-orange-600/20 p-4 rounded-lg">
+<span class="material-symbols-outlined text-orange-500 text-3xl" data-icon="group" data-weight="fill">group</span>
+</div>
+<div>
+<p class="text-xs font-bold text-neutral-500 uppercase tracking-widest mb-1">Total Registrations</p>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl font-black text-white font-headline">1,284</span>
+<span class="text-orange-500 text-sm font-bold">+12%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Controls / Search Bar -->
+<div class="mb-6 grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-4">
+<div class="md:col-span-2 lg:col-span-3 relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-neutral-500">search</span>
+<input class="w-full bg-neutral-900 border border-neutral-800 rounded-lg py-4 pl-12 pr-4 text-xs font-bold tracking-widest focus:ring-2 focus:ring-orange-600 focus:border-orange-600 text-white placeholder-neutral-600 transition-all uppercase" placeholder="SEARCH MEMBERS (NAME, EMAIL...)" type="text"/>
+</div>
+<div class="relative">
+<select class="w-full bg-neutral-900 border border-neutral-800 rounded-lg py-4 px-4 text-xs font-bold tracking-widest focus:ring-2 focus:ring-orange-600 focus:border-orange-600 text-white transition-all uppercase appearance-none">
+<option>FITNESS STATUS</option>
+<option>BEGINNER</option>
+<option>INTERMEDIATE</option>
+<option>ADVANCED</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-neutral-500 pointer-events-none">filter_list</span>
+</div>
+<div class="relative">
+<select class="w-full bg-neutral-900 border border-neutral-800 rounded-lg py-4 px-4 text-xs font-bold tracking-widest focus:ring-2 focus:ring-orange-600 focus:border-orange-600 text-white transition-all uppercase appearance-none">
+<option>PRIMARY GOAL</option>
+<option>MUSCLE GAIN</option>
+<option>WEIGHT LOSS</option>
+<option>ENDURANCE</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-neutral-500 pointer-events-none">flag</span>
+</div>
+<button class="bg-orange-600 hover:bg-orange-700 text-white font-black py-4 px-6 rounded-lg text-xs tracking-widest transition-all active:scale-95 flex items-center justify-center gap-2 uppercase">
+<span class="material-symbols-outlined text-sm" data-icon="download">download</span>
+                Export CSV
+            </button>
+</div>
+<!-- High-Density Registration List -->
+<div class="glass-panel rounded-xl overflow-hidden border border-neutral-800 shadow-2xl">
+<!-- Table Header (Hidden on small mobile) -->
+<div class="hidden md:grid grid-cols-12 gap-4 px-6 py-4 bg-neutral-900/50 border-b border-neutral-800 text-[10px] font-black tracking-[0.2em] text-neutral-500 uppercase">
+<div class="col-span-3">Member Details</div>
+<div class="col-span-2">Contact</div>
+<div class="col-span-2 text-center">Status</div>
+<div class="col-span-2 text-center">Primary Goal</div>
+<div class="col-span-2 text-right">Registered</div>
+<div class="col-span-1"></div>
+</div>
+<!-- List Entries -->
+<div class="divide-y divide-neutral-800">
+<!-- Entry 1 -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-4 px-6 py-6 items-center hover:bg-orange-500/[0.03] transition-colors group">
+<div class="col-span-1 md:col-span-3 flex items-center gap-4">
+<div class="w-12 h-12 rounded bg-neutral-800 flex-shrink-0 overflow-hidden border border-neutral-700 group-hover:border-orange-600 transition-colors">
+<img class="w-full h-full object-cover" data-alt="A focused professional portrait of a fit individual in athletic wear, dramatic high-contrast lighting, dark background, orange glowing highlights on the skin, fitness photography style, intense gaze." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqDdSFkZk64_L_GXZgXIAzrx7Zk8CX7VmFr4aQzPD5ksedihkE02a8lgX2zDY6fe6rVo27mQU_iK5cfWk-SpRSm3WEVFjRQYxpwevEoK9rIZM4CL-R68kZY4P4YfQ3gQxtUSfOAS_mwKIt9ez3kcamGRNddKRVWICfoX6OLf5JrAYEr9gRBjsIyvYXJw-Hd4jrZVaF2hmKQtKvDnSCjMKcEOaLeE5jetmxlbrbV7p2HcwVjdPfiBfWKiRdqXJNwtnc4nYRFSKnf9pf"/>
+</div>
+<div>
+<h4 class="text-white font-bold text-sm tracking-tight">Alex Rivers</h4>
+<p class="text-neutral-500 text-xs font-medium">ID: #IP-9902</p>
+</div>
+</div>
+<div class="col-span-1 md:col-span-2 flex flex-col">
+<span class="text-xs text-neutral-300 font-medium truncate">a.rivers@email.com</span>
+<span class="text-[10px] text-neutral-500 font-bold">+1 (555) 012-9934</span>
+</div>
+<div class="col-span-1 md:col-span-2 flex justify-start md:justify-center">
+<span class="px-3 py-1 bg-neutral-800 text-orange-400 text-[10px] font-black rounded border border-orange-500/20 uppercase tracking-widest">Advanced</span>
+</div>
+<div class="col-span-1 md:col-span-2 flex justify-start md:justify-center">
+<span class="text-xs text-white font-bold uppercase tracking-tighter">Muscle Gain</span>
+</div>
+<div class="col-span-1 md:col-span-2 text-left md:text-right">
+<span class="text-[10px] text-neutral-500 font-black uppercase">Oct 24, 2024</span>
+</div>
+<div class="col-span-1 flex justify-end">
+<button class="w-8 h-8 flex items-center justify-center rounded bg-neutral-800 hover:bg-orange-600 text-neutral-400 hover:text-white transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Entry 2 -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-4 px-6 py-6 items-center hover:bg-orange-500/[0.03] transition-colors group">
+<div class="col-span-1 md:col-span-3 flex items-center gap-4">
+<div class="w-12 h-12 rounded bg-neutral-800 flex-shrink-0 overflow-hidden border border-neutral-700 group-hover:border-orange-600 transition-colors">
+<img class="w-full h-full object-cover" data-alt="A striking athletic portrait of a woman with a strong profile, dark cinematic lighting with vibrant orange edge light, gym environment background, high-end fitness brand aesthetic, professional photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuATDwYzKSDpR4DjM7DEweMwdT7z8SuaXYottuBbBDfTFzlIMht1J4klkUowI0g2K-fxjGXbGR77DqMlq3Su7ZFlv2kPgwtchJkFa6FY5huEzSv9KYm35EpvqX73KgBr6LEmVfXkDtZWOHGstb-pVoeD1Zl8ePn1Ytx3mjUZJVO1eOvIu6UhHnRCkNcG_Sp1-34FWKeJRIwBCE9uuztleUGoEikgWvpj1lKIqv8jWIPlDyXAPbDltYy3E5UqvkzU4KQrDkKxMw9HK353"/>
+</div>
+<div>
+<h4 class="text-white font-bold text-sm tracking-tight">Jordan Smith</h4>
+<p class="text-neutral-500 text-xs font-medium">ID: #IP-9881</p>
+</div>
+</div>
+<div class="col-span-1 md:col-span-2 flex flex-col">
+<span class="text-xs text-neutral-300 font-medium truncate">j.smith@webnet.io</span>
+<span class="text-[10px] text-neutral-500 font-bold">+1 (555) 433-2110</span>
+</div>
+<div class="col-span-1 md:col-span-2 flex justify-start md:justify-center">
+<span class="px-3 py-1 bg-neutral-800 text-neutral-400 text-[10px] font-black rounded border border-neutral-700 uppercase tracking-widest">Beginner</span>
+</div>
+<div class="col-span-1 md:col-span-2 flex justify-start md:justify-center">
+<span class="text-xs text-white font-bold uppercase tracking-tighter">Weight Loss</span>
+</div>
+<div class="col-span-1 md:col-span-2 text-left md:text-right">
+<span class="text-[10px] text-neutral-500 font-black uppercase">Oct 23, 2024</span>
+</div>
+<div class="col-span-1 flex justify-end">
+<button class="w-8 h-8 flex items-center justify-center rounded bg-neutral-800 hover:bg-orange-600 text-neutral-400 hover:text-white transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Entry 3 -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-4 px-6 py-6 items-center hover:bg-orange-500/[0.03] transition-colors group">
+<div class="col-span-1 md:col-span-3 flex items-center gap-4">
+<div class="w-12 h-12 rounded bg-neutral-800 flex-shrink-0 overflow-hidden border border-neutral-700 group-hover:border-orange-600 transition-colors">
+<img class="w-full h-full object-cover" data-alt="Close-up of a weightlifter's focused face, sweat glistening, backlit by intense orange strobe lights, dark industrial gym setting, grainy high-contrast cinematic style, modern fitness UI imagery." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBO0qU1L-3hGRSPyBTLOQMmwmS3Wv87-bCc94phakh0CJ29at_b0sr8jLup2FFsIgRAzaTvSfiT8Kjmjnb13NVHYvEm5N7e_R83iFP8Oq9yPKIrxjCVYn6-o3pug4GhnD2Des2D6LLGsVaadr0Ou5z4OC6hx4-W2n7orBaJQ_DucTMMNFpR2Z_-xCcW-F-PfYsIWqTUToRiqwXRqsF2yQJNqJAXJn580NMuqIRzKPQM-wlvHynpuUKwsD2mVA-JM5h4-fW7GqIZrCn3"/>
+</div>
+<div>
+<h4 class="text-white font-bold text-sm tracking-tight">Marcus Thorne</h4>
+<p class="text-neutral-500 text-xs font-medium">ID: #IP-9755</p>
+</div>
+</div>
+<div class="col-span-1 md:col-span-2 flex flex-col">
+<span class="text-xs text-neutral-300 font-medium truncate">m.thorne@pulse.com</span>
+<span class="text-[10px] text-neutral-500 font-bold">+44 7700 900212</span>
+</div>
+<div class="col-span-1 md:col-span-2 flex justify-start md:justify-center">
+<span class="px-3 py-1 bg-neutral-800 text-orange-300 text-[10px] font-black rounded border border-orange-500/20 uppercase tracking-widest">Intermediate</span>
+</div>
+<div class="col-span-1 md:col-span-2 flex justify-start md:justify-center">
+<span class="text-xs text-white font-bold uppercase tracking-tighter">Endurance</span>
+</div>
+<div class="col-span-1 md:col-span-2 text-left md:text-right">
+<span class="text-[10px] text-neutral-500 font-black uppercase">Oct 22, 2024</span>
+</div>
+<div class="col-span-1 flex justify-end">
+<button class="w-8 h-8 flex items-center justify-center rounded bg-neutral-800 hover:bg-orange-600 text-neutral-400 hover:text-white transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Pagination Footer -->
+<div class="px-6 py-4 bg-neutral-900 border-t border-neutral-800 flex flex-col sm:flex-row justify-between items-center gap-4">
+<p class="text-xs text-neutral-500 font-bold uppercase tracking-widest">Showing 1 to 10 of 1,284 Registrations</p>
+<div class="flex gap-2">
+<button class="p-2 bg-neutral-800 border border-neutral-700 rounded hover:bg-neutral-700 transition-colors text-neutral-400 disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-lg" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="px-4 py-2 bg-orange-600 text-white text-xs font-black rounded shadow-lg shadow-orange-600/20">1</button>
+<button class="px-4 py-2 bg-neutral-800 border border-neutral-700 text-white text-xs font-black rounded hover:bg-neutral-700 transition-colors">2</button>
+<button class="px-4 py-2 bg-neutral-800 border border-neutral-700 text-white text-xs font-black rounded hover:bg-neutral-700 transition-colors">3</button>
+<button class="p-2 bg-neutral-800 border border-neutral-700 rounded hover:bg-neutral-700 transition-colors text-neutral-400">
+<span class="material-symbols-outlined text-lg" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="flex justify-between items-center px-8 py-4 md:ml-64 w-full md:w-[calc(100%-16rem)] bg-black dark:bg-black border-t border-neutral-900">
+<div class="text-neutral-600 dark:text-neutral-500 font-body text-xs font-semibold uppercase tracking-widest">
+            © 2024 IRON PULSE SYSTEMS. ALL RIGHTS RESERVED.
+        </div>
+<div class="flex gap-6">
+<a class="text-neutral-600 hover:text-orange-500 transition-colors font-body text-xs font-semibold uppercase tracking-widest opacity-80 hover:opacity-100" href="#">System Status</a>
+<a class="text-neutral-600 hover:text-orange-500 transition-colors font-body text-xs font-semibold uppercase tracking-widest opacity-80 hover:opacity-100" href="#">Documentation</a>
+<a class="text-neutral-600 hover:text-orange-500 transition-colors font-body text-xs font-semibold uppercase tracking-widest opacity-80 hover:opacity-100" href="#">Support</a>
+</div>
+</footer>
+<!-- Mobile Navigation Bar (Responsive Pivot) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full bg-neutral-900 border-t border-neutral-800 px-6 py-3 flex justify-around items-center z-50">
+<button class="flex flex-col items-center gap-1 text-orange-500">
+<span class="material-symbols-outlined" data-icon="group" data-weight="fill">group</span>
+<span class="text-[10px] font-black uppercase tracking-tighter">Registrations</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-neutral-500 hover:text-neutral-200">
+<span class="material-symbols-outlined" data-icon="monitoring">monitoring</span>
+<span class="text-[10px] font-black uppercase tracking-tighter">Analytics</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-neutral-500 hover:text-neutral-200">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-[10px] font-black uppercase tracking-tighter">Settings</span>
+</button>
+</nav>
+<script>
+        // Micro-interactions for list items
+        document.querySelectorAll('.hover\\:bg-orange-500\\/\\[0\\.03\\]').forEach(row => {
+            row.addEventListener('mouseenter', () => {
+                row.querySelector('img').style.transform = 'scale(1.1)';
+                row.querySelector('img').style.transition = 'transform 0.5s ease-out';
+            });
+            row.addEventListener('mouseleave', () => {
+                row.querySelector('img').style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body></html>
