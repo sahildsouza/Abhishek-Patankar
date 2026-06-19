@@ -109,7 +109,8 @@ export default function Registration() {
         <div className="relative z-20 max-w-5xl mx-auto text-center">
 
           <h1 className="text-6xl md:text-8xl font-black mb-6 leading-none tracking-tight">
-            FORGE YOUR <br className="hidden md:block"/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF9933] to-[#e68a2e] italic pr-2">ULTIMATE FORM</span>
+            FORGE YOUR <br className="hidden md:block"/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF9933] to-[#e68a2e] italic pr-2">ULTIMATE</span>{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF9933] to-[#e68a2e] italic pr-2">FORM</span>
           </h1>
           <p className="text-xl md:text-2xl text-neutral-400 font-['Inter'] mb-12 max-w-2xl mx-auto font-light">
             Join the exclusive 90-minute live webinar on elite training protocols. Zero fluff. Pure results. <span className="text-white font-semibold">June 21, 2026.</span>
