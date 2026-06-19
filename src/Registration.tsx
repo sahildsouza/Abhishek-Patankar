@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from './supabaseClient';
 import { useNavigate } from 'react-router-dom';
+import { countryCodes } from './countryCodes';
 
 interface Transformation {
   id: string;
@@ -27,6 +28,7 @@ export default function Registration() {
     biggest_struggle: 'Diet/Nutrition',
     injuries: 'No'
   });
+  const [countryCode, setCountryCode] = useState('+91');
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
@@ -55,7 +57,12 @@ export default function Registration() {
     setLoading(true);
     setError('');
     
-    const { error: sbError } = await supabase.from('registrations').insert([formData]);
+    const submissionData = {
+      ...formData,
+      phone: `${countryCode} ${formData.phone}`
+    };
+
+    const { error: sbError } = await supabase.from('registrations').insert([submissionData]);
 
     setLoading(false);
     if (sbError) {
@@ -100,7 +107,7 @@ export default function Registration() {
         </div>
         
         <div className="relative z-20 max-w-5xl mx-auto text-center">
-          <p className="text-[#FF9933] font-bold mb-4 tracking-[0.3em] uppercase text-sm">Namaste & Swagat</p>
+
           <h1 className="text-6xl md:text-8xl font-black mb-6 leading-none tracking-tight">
             FORGE YOUR <br className="hidden md:block"/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF9933] to-[#e68a2e] italic">ULTIMATE FORM</span>
           </h1>
@@ -267,13 +274,32 @@ export default function Registration() {
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-xs font-bold text-neutral-500 mb-2 uppercase tracking-widest">Phone Number</label>
-                  <input type="tel" name="phone" value={formData.phone} onChange={handleChange} 
-                    className="w-full bg-[#111] border border-neutral-800 rounded-none px-4 py-4 text-white focus:outline-none focus:border-[#FF9933] transition-colors" placeholder="+91 90000 00000" />
+                  <div className="flex bg-[#111] border border-neutral-800 focus-within:border-[#FF9933] transition-colors">
+                    <div className="relative flex-shrink-0 flex items-center border-r border-neutral-800">
+                      <select 
+                        value={countryCode} 
+                        onChange={(e) => setCountryCode(e.target.value)}
+                        className="w-[105px] h-full bg-transparent outline-none appearance-none pl-3 pr-6 py-4 text-white font-bold tracking-wide cursor-pointer"
+                      >
+                        {countryCodes.map((c) => (
+                          <option key={c.code} value={c.dial_code} className="bg-[#111] text-white">
+                            {c.code} {c.dial_code}
+                          </option>
+                        ))}
+                      </select>
+                      <div className="pointer-events-none absolute right-2 flex items-center text-[#FF9933]">
+                        <svg className="fill-current h-3 w-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                      </div>
+                    </div>
+                    <input required type="tel" name="phone" value={formData.phone} onChange={handleChange} 
+                      maxLength={10} minLength={10} pattern="[0-9]{10}" title="Please enter exactly 10 digits"
+                      className="w-full h-full bg-transparent outline-none px-4 py-4 text-white font-bold tracking-widest placeholder-neutral-500" placeholder="9000000000" />
+                  </div>
                 </div>
                 <div>
                   <label className="block text-xs font-bold text-neutral-500 mb-2 uppercase tracking-widest">Age Group</label>
-                  <select name="age_group" value={formData.age_group} onChange={handleChange} 
-                    className="w-full bg-[#111] border border-neutral-800 rounded-none px-4 py-4 text-white focus:outline-none focus:border-[#FF9933] transition-colors appearance-none">
+                  <select required name="age_group" value={formData.age_group} onChange={handleChange} 
+                    className="w-full bg-[#111] border border-neutral-800 rounded-none px-4 py-4 text-white focus:outline-none focus:border-[#FF9933] transition-colors appearance-none cursor-pointer">
                     <option value="Under 18">Under 18</option>
                     <option value="18-25">18-25</option>
                     <option value="26-35">26-35</option>
@@ -286,8 +312,8 @@ export default function Registration() {
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-xs font-bold text-neutral-500 mb-2 uppercase tracking-widest">How active are you currently?</label>
-                  <select name="fitness_status" value={formData.fitness_status} onChange={handleChange} 
-                    className="w-full bg-[#111] border border-neutral-800 rounded-none px-4 py-4 text-white focus:outline-none focus:border-[#FF9933] transition-colors appearance-none">
+                  <select required name="fitness_status" value={formData.fitness_status} onChange={handleChange} 
+                    className="w-full bg-[#111] border border-neutral-800 rounded-none px-4 py-4 text-white focus:outline-none focus:border-[#FF9933] transition-colors appearance-none cursor-pointer">
                     <option value="Just starting out">I'm just starting out</option>
                     <option value="Working out occasionally">I work out occasionally</option>
                     <option value="Training regularly">I train regularly</option>
@@ -295,8 +321,8 @@ export default function Registration() {
                 </div>
                 <div>
                   <label className="block text-xs font-bold text-neutral-500 mb-2 uppercase tracking-widest">What is your main goal?</label>
-                  <select name="goal" value={formData.goal} onChange={handleChange} 
-                    className="w-full bg-[#111] border border-neutral-800 rounded-none px-4 py-4 text-white focus:outline-none focus:border-[#FF9933] transition-colors appearance-none">
+                  <select required name="goal" value={formData.goal} onChange={handleChange} 
+                    className="w-full bg-[#111] border border-neutral-800 rounded-none px-4 py-4 text-white focus:outline-none focus:border-[#FF9933] transition-colors appearance-none cursor-pointer">
                     <option value="Lose weight and tone up">Lose weight and tone up</option>
                     <option value="Build muscle and get stronger">Build muscle and get stronger</option>
                     <option value="Improve stamina">Improve stamina</option>
@@ -307,8 +333,8 @@ export default function Registration() {
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-xs font-bold text-neutral-500 mb-2 uppercase tracking-widest">Biggest struggle right now?</label>
-                  <select name="biggest_struggle" value={formData.biggest_struggle} onChange={handleChange} 
-                    className="w-full bg-[#111] border border-neutral-800 rounded-none px-4 py-4 text-white focus:outline-none focus:border-[#FF9933] transition-colors appearance-none">
+                  <select required name="biggest_struggle" value={formData.biggest_struggle} onChange={handleChange} 
+                    className="w-full bg-[#111] border border-neutral-800 rounded-none px-4 py-4 text-white focus:outline-none focus:border-[#FF9933] transition-colors appearance-none cursor-pointer">
                     <option value="Diet/Nutrition">Diet & Nutrition</option>
                     <option value="Consistency">Staying Consistent</option>
                     <option value="Not knowing what to do">Not knowing what to do</option>
@@ -317,8 +343,8 @@ export default function Registration() {
                 </div>
                 <div>
                   <label className="block text-xs font-bold text-neutral-500 mb-2 uppercase tracking-widest">Any injuries?</label>
-                  <select name="injuries" value={formData.injuries} onChange={handleChange} 
-                    className="w-full bg-[#111] border border-neutral-800 rounded-none px-4 py-4 text-white focus:outline-none focus:border-[#FF9933] transition-colors appearance-none">
+                  <select required name="injuries" value={formData.injuries} onChange={handleChange} 
+                    className="w-full bg-[#111] border border-neutral-800 rounded-none px-4 py-4 text-white focus:outline-none focus:border-[#FF9933] transition-colors appearance-none cursor-pointer">
                     <option value="No">No, I'm fully healthy</option>
                     <option value="Yes - Minor">Yes, a minor ache/issue</option>
                     <option value="Yes - Major">Yes, something serious</option>
