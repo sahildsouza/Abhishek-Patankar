@@ -149,7 +149,7 @@ export default function Registration() {
           <div className="w-full">
             <div className="text-center mb-16 px-6">
               <h2 className="text-5xl font-black mb-4">THE EVIDENCE</h2>
-              <p className="text-neutral-500 font-['Inter'] text-lg">Real results from the Abhishek Fitness protocol. Swipe to see more.</p>
+              <p className="text-neutral-500 font-['Inter'] text-lg">Real results from the AP Fitness protocol. Swipe to see more.</p>
             </div>
             
             {/* The Horizontal Slider container */}
@@ -337,7 +337,7 @@ export default function Registration() {
 
       {/* Footer */}
       <footer className="bg-[#050505] py-12 border-t border-neutral-900 text-center">
-        <p className="text-neutral-600 font-['Inter'] text-sm uppercase tracking-widest">© 2026 Abhishek Fitness. All rights reserved.</p>
+        <p className="text-neutral-600 font-['Inter'] text-sm uppercase tracking-widest">© 2026 AP Fitness. All rights reserved.</p>
       </footer>
     </div>
   );
