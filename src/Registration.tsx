@@ -262,12 +262,12 @@ export default function Registration() {
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-xs font-bold text-neutral-500 mb-2 uppercase tracking-widest">Full Name</label>
-                  <input required type="text" name="name" value={formData.name} onChange={handleChange} 
+                  <input required type="text" name="name" value={formData.name} onChange={handleChange} maxLength={100}
                     className="w-full bg-[#111] border border-neutral-800 rounded-none px-4 py-4 text-white focus:outline-none focus:border-[#FF9933] transition-colors" placeholder="e.g. Rahul Sharma" />
                 </div>
                 <div>
                   <label className="block text-xs font-bold text-neutral-500 mb-2 uppercase tracking-widest">Email Address</label>
-                  <input required type="email" name="email" value={formData.email} onChange={handleChange} 
+                  <input required type="email" name="email" value={formData.email} onChange={handleChange} maxLength={255}
                     className="w-full bg-[#111] border border-neutral-800 rounded-none px-4 py-4 text-white focus:outline-none focus:border-[#FF9933] transition-colors" placeholder="rahul@example.com" />
                 </div>
               </div>

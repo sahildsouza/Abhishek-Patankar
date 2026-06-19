@@ -12,6 +12,15 @@ dist
 dist-ssr
 *.local
 
+# Environment variables
+.env
+.env.*
+
+# Utility scripts with credentials
+createUser.cjs
+convert.cjs
+convert.js
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

@@ -104,15 +104,33 @@ export default function Admin() {
     navigate('/');
   };
 
+  const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+  const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+
+  const validateFile = (file: File): string | null => {
+    if (!ALLOWED_TYPES.includes(file.type)) {
+      return `Invalid file type: ${file.type}. Allowed: JPEG, PNG, WebP, GIF.`;
+    }
+    if (file.size > MAX_FILE_SIZE) {
+      return `File too large (${(file.size / 1024 / 1024).toFixed(1)}MB). Max: 5MB.`;
+    }
+    return null;
+  };
+
   const handleUpload = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!uploadBefore || !uploadAfter) return;
+
+    const beforeErr = validateFile(uploadBefore);
+    if (beforeErr) { alert('Before image: ' + beforeErr); return; }
+    const afterErr = validateFile(uploadAfter);
+    if (afterErr) { alert('After image: ' + afterErr); return; }
 
     setUploading(true);
 
     const uploadFile = async (file: File) => {
       const fileExt = file.name.split('.').pop();
-      const fileName = `${Math.random()}.${fileExt}`;
+      const fileName = `${crypto.randomUUID()}.${fileExt}`;
       const { error } = await supabase.storage.from('transformations').upload(fileName, file);
       if (error) throw error;
       const { data } = supabase.storage.from('transformations').getPublicUrl(fileName);
@@ -127,7 +145,7 @@ export default function Admin() {
 
       const { error: dbError } = await supabase
         .from('transformations')
-        .insert([{ before_image_url: beforeUrl, after_image_url: afterUrl, description: uploadDesc }]);
+        .insert([{ before_image_url: beforeUrl, after_image_url: afterUrl, description: uploadDesc.trim() }]);
 
       if (dbError) throw dbError;
 
